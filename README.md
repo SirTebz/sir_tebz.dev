@@ -56,7 +56,7 @@ No additional setup or dependencies are required.
 
 ## 🌐 Live Demo
 
-You can view the live version of the portfolio [here](https://sirtebz.github.io/Portfolio-Website-II/).
+You can view the live version of the portfolio [here](https://sirtebz-dev.netlify.app/).
 
 ## 📄 License
 
