@@ -31,9 +31,9 @@ function myMenuFunction(){
   }
 
 
-/* ----- TYPING EFFECT ----- */
+/* ----- TYPING EFFECT (UPDATED for Developer Focus) ----- */
  let typingEffect = new Typed(".typedText",{
-    strings : ["IT Specialist", "Developer", "Tech Enthusiast"],
+    strings : ["Software Developer", "IT Specialist", "Tech Enthusiast."],
     loop : true,
     typeSpeed : 90, 
     backSpeed : 80,
@@ -114,34 +114,7 @@ function scrollActive() {
 
 window.addEventListener('scroll', scrollActive)
 
-/* ----- POP-UP OVERLAY ----- */
-
-// Function to show the pop-up
-function showPopup(title, message) {
-  document.getElementById('modalTitle').textContent = title;
-  document.getElementById('modalMessage').textContent = message;
-  document.getElementById('modalOverlay').style.display = 'flex';
-  setTimeout(() => {
-    document.getElementById('modalContent').classList.add('show');
-  }, 10);
-}
-
-// Function to hide the pop-up
-function hidePopup() {
-  document.getElementById('modalContent').classList.remove('show');
-  setTimeout(() => {
-    document.getElementById('modalOverlay').style.display = 'none';
-  }, 300);
-}
-
-// This hides the pop-up if the user clicks the dark background
-document.getElementById('modalOverlay').addEventListener('click', (event) => {
-  if (event.target === document.getElementById('modalOverlay')) {
-    hidePopup();
-  }
-});
-
-/* ----- POP-UP FORM SUCCESS ----- */
+/* ----- POP-UP OVERLAY FOR CONTACT FORM SUCCESS (Bug Fix: Removed duplicate functions) ----- */
 
 const contactForm = document.getElementById('contactForm');
 const modalOverlay = document.getElementById('modalOverlay');
@@ -167,29 +140,30 @@ function hidePopup() {
   }, 300);
 }
 
-// Listen for the form submission
-contactForm.addEventListener('submit', (event) => {
-// Prevent the form from submitting normally
-event.preventDefault();
+// Listen for the form submission (Only enabled if the form is uncommented in index.html)
+if (contactForm) {
+  contactForm.addEventListener('submit', (event) => {
+    // Prevent the form from submitting normally
+    event.preventDefault();
 
-// Here you would typically send the form data to a server
-// For now, we'll just show the success message.
+    // Get form data (optional, but good practice)
+    const name = document.getElementById('name').value;
+    
+    // Display a success message in the pop-up
+    showPopup('Success!', 'Thank you for your message, ' + name + '! We will get back to you shortly.');
 
-// Get form data (optional, but good practice)
-const name = document.getElementById('name').value;
-const email = document.getElementById('email').value;
-const message = document.getElementById('message').value;
+    // Clear the form fields after submission
+    contactForm.reset();
+  });
+}
 
-// Display a success message in the pop-up
-showPopup('Success!', 'Thank you for your message, ' + name + '! We will get back to you shortly.');
-
-// Clear the form fields after submission
-contactForm.reset();
-});
 
 // Hide the pop-up if the user clicks the dark background
-modalOverlay.addEventListener('click', (event) => {
-  if (event.target === modalOverlay) {
-    hidePopup();
-  }
-});
+// Bug Fix: The final closing brace } was wrapping this listener and causing syntax errors.
+if (modalOverlay) {
+  modalOverlay.addEventListener('click', (event) => {
+    if (event.target === modalOverlay) {
+      hidePopup();
+    }
+  });
+}
